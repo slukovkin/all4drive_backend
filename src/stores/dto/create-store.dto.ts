@@ -1,4 +1,4 @@
 export class CreateStoreDto {
-    readonly value: string
-    readonly description: string
+  readonly value: string;
+  readonly description: string;
 }
