@@ -6,16 +6,16 @@ import {User} from "./users.model";
 import {Role} from "../roles/roles.model";
 import {UserRoles} from "../roles/user-roles.model";
 import {RolesModule} from "../roles/roles.module";
-import {UserStore} from "../store/user-store.model";
-import {Store} from "../store/store.model";
-import {StoreModule} from "../store/store.module";
+import {UserStore} from "../stores/user-stores.model";
+import {Store} from "../stores/stores.model";
+import {StoresModule} from "../stores/stores.module";
 
 @Module({
   controllers: [UsersController],
   providers: [UsersService],
   imports: [SequelizeModule.forFeature([User, Role, Store, UserRoles, UserStore]),
     RolesModule,
-    StoreModule,
+    StoresModule,
   ]
 })
 export class UsersModule {}

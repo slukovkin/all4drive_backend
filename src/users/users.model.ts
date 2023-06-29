@@ -2,8 +2,8 @@ import {BelongsToMany, Column, DataType, Model, Table} from "sequelize-typescrip
 import {ApiProperty} from "@nestjs/swagger";
 import {Role} from "../roles/roles.model";
 import {UserRoles} from "../roles/user-roles.model";
-import {Store} from "../store/store.model";
-import {UserStore} from "../store/user-store.model";
+import {Store} from "../stores/stores.model";
+import {UserStore} from "../stores/user-stores.model";
 
 interface IUserCreation {
     email: string

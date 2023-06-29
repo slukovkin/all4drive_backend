@@ -7,11 +7,11 @@ import {User} from "./users/users.model";
 import {Role} from "./roles/roles.model";
 import {UserRoles} from "./roles/user-roles.model";
 import { AuthModule } from './auth/auth.module';
-import { StoreService } from './store/store.service';
-import { StoreController } from './store/store.controller';
-import { StoreModule } from './store/store.module';
-import {Store} from "./store/store.model";
-import {UserStore} from "./store/user-store.model";
+import { StoresService } from './stores/stores.service';
+import { StoresController } from './stores/stores.controller';
+import { StoresModule } from './stores/stores.module';
+import {Store} from "./stores/stores.model";
+import {UserStore} from "./stores/user-stores.model";
 
 @Module({
   imports: [
@@ -31,7 +31,7 @@ import {UserStore} from "./store/user-store.model";
       UsersModule,
       RolesModule,
       AuthModule,
-      StoreModule,
+      StoresModule,
   ],
 })
 export class AppModule {}

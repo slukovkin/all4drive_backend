@@ -1,6 +1,6 @@
 import {BelongsToMany, Column, DataType, Model, Table} from "sequelize-typescript";
 import {User} from "../users/users.model";
-import {UserStore} from "./user-store.model";
+import {UserStore} from "./user-stores.model";
 
 interface IStoreCreation {
     value: string

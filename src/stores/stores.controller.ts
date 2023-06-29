@@ -1,10 +1,10 @@
 import {Body, Controller, Get, Param, Post} from '@nestjs/common';
-import {StoreService} from "./store.service";
+import {StoresService} from "./stores.service";
 import {CreateStoreDto} from "./dto/create-store.dto";
 
 @Controller('store')
-export class StoreController {
-    constructor(private storeService: StoreService) {}
+export class StoresController {
+    constructor(private storeService: StoresService) {}
 
     @Post()
     createStore(@Body() dto: CreateStoreDto) {
