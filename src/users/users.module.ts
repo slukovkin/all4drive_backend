@@ -18,5 +18,6 @@ import { StoresModule } from '../stores/stores.module';
     RolesModule,
     StoresModule,
   ],
+  exports: [UsersService]
 })
 export class UsersModule {}

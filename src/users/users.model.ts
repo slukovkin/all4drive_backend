@@ -50,5 +50,5 @@ export class User extends Model<User, IUserCreation> {
   roles: Role[];
 
   @BelongsToMany(() => Store, () => UserStore)
-  stores: Store;
+  stores: Store[];
 }

@@ -15,15 +15,13 @@ export class UsersService {
 
   async createUser(dto: CreateUserDto) {
     try {
-      // const candidate = await this.userRepository.findAll({where: {email: dto.email}})
-      // if (candidate) {
-      //     return new HttpException(`Пользователь ${dto.email} существует в БД`, HttpStatus.CONFLICT)
-      // }
       const user = await this.userRepository.create(dto);
       const role = await this.roleService.getRoleByValue('user');
       const store = await this.storeService.getStoreByValue(dto.store);
       await user.$set('stores', [store.id]);
       await user.$set('roles', [role.id]);
+      user.roles = [role]
+      user.stores = [store]
       return user;
     } catch (e) {
       return new HttpException('Bad requiest', HttpStatus.BAD_REQUEST);
@@ -38,5 +36,10 @@ export class UsersService {
   async getOneUser(id: string) {
     const user = await this.userRepository.findByPk(id);
     return user;
+  }
+
+  async getUserByEmail(email: string) {
+    const user = await this.userRepository.findOne({where: {email}, include: {all: true}})
+    return user
   }
 }
