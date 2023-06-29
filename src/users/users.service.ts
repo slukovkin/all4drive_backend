@@ -3,11 +3,14 @@ import {User} from "./users.model";
 import {InjectModel} from "@nestjs/sequelize";
 import {CreateUserDto} from "./dto/create-user.dto";
 import {RolesService} from "../roles/roles.service";
+import {StoreService} from "../store/store.service";
 
 @Injectable()
 export class UsersService {
     constructor(@InjectModel(User) private userRepository: typeof User,
-                private roleService: RolesService) {}
+                private roleService: RolesService,
+                private storeService: StoreService
+    ) {}
 
     async createUser(dto: CreateUserDto) {
         try {
@@ -18,6 +21,8 @@ export class UsersService {
             const user = await this.userRepository.create(dto)
             const role = await this.roleService.getRoleByValue('user')
             // Добавить назначение склада для пользователя
+            const store = await this.storeService.getStoreByValue(dto.store)
+            await user.$set('stores', [store.id])
             await user.$set('roles', [role.id])
             return user
         } catch (e) {
