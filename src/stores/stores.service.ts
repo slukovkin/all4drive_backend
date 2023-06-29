@@ -1,10 +1,10 @@
 import {Injectable} from '@nestjs/common';
 import {InjectModel} from "@nestjs/sequelize";
-import {Store} from "./store.model";
+import {Store} from "./stores.model";
 import {CreateStoreDto} from "./dto/create-store.dto";
 
 @Injectable()
-export class StoreService {
+export class StoresService {
     constructor(@InjectModel(Store) private storeRepository: typeof Store) {}
 
     async createStore(dto: CreateStoreDto) {
