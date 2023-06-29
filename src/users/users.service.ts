@@ -17,6 +17,7 @@ export class UsersService {
             // }
             const user = await this.userRepository.create(dto)
             const role = await this.roleService.getRoleByValue('user')
+            // Добавить назначение склада для пользователя
             await user.$set('roles', [role.id])
             return user
         } catch (e) {

@@ -10,6 +10,8 @@ import { AuthModule } from './auth/auth.module';
 import { StoreService } from './store/store.service';
 import { StoreController } from './store/store.controller';
 import { StoreModule } from './store/store.module';
+import {Store} from "./store/store.model";
+import {UserStore} from "./store/user-store.model";
 
 @Module({
   imports: [
@@ -23,7 +25,7 @@ import { StoreModule } from './store/store.module';
         username: process.env.POSTGRES_USER,
         password: process.env.POSTGRES_PASSWORD,
         database: process.env.POSTGRES_DB,
-        models: [User, Role, UserRoles],
+        models: [User, Role, UserRoles, Store, UserStore],
         autoLoadModels: true
       }),
       UsersModule,

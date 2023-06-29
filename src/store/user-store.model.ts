@@ -1,16 +1,16 @@
 import {Column, DataType, ForeignKey, Model, Table} from "sequelize-typescript";
-import {Role} from "./roles.model";
 import {User} from "../users/users.model";
+import {Store} from "./store.model";
 
-@Table({tableName: 'user_roles', createdAt: false, updatedAt: false})
-export class UserRoles extends Model<UserRoles> {
+@Table({tableName: 'user_stores', createdAt: false, updatedAt: false})
+export class UserStore extends Model<UserStore> {
 
     @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
     id: number
 
-    @ForeignKey(() => Role)
+    @ForeignKey(() => Store)
     @Column({type: DataType.INTEGER})
-    roleId: number
+    storeId: number
 
     @ForeignKey(() => User)
     @Column({type: DataType.INTEGER})
