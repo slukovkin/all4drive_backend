@@ -20,8 +20,8 @@ export class UsersService {
       const store = await this.storeService.getStoreByValue(dto.store);
       await user.$set('stores', [store.id]);
       await user.$set('roles', [role.id]);
-      user.roles = [role]
-      user.stores = [store]
+      user.roles = [role];
+      user.stores = [store];
       return user;
     } catch (e) {
       return new HttpException('Bad requiest', HttpStatus.BAD_REQUEST);
@@ -39,7 +39,11 @@ export class UsersService {
   }
 
   async getUserByEmail(email: string) {
-    const user = await this.userRepository.findOne({where: {email}, include: {all: true}})
-    return user
+    const user = await this.userRepository.findOne({
+      rejectOnEmpty: undefined,
+      where: { email },
+      include: { all: true }
+    });
+    return user;
   }
 }

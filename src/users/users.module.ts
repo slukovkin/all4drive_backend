@@ -18,6 +18,6 @@ import { StoresModule } from '../stores/stores.module';
     RolesModule,
     StoresModule,
   ],
-  exports: [UsersService]
+  exports: [UsersService],
 })
 export class UsersModule {}
