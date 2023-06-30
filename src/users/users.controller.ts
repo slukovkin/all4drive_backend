@@ -1,8 +1,10 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UsersService } from './users.service';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { User } from './users.model';
+import {Body, Controller, Get, Param, Post, UseGuards} from '@nestjs/common';
+import {CreateUserDto} from './dto/create-user.dto';
+import {UsersService} from './users.service';
+import {ApiOperation, ApiResponse, ApiTags} from '@nestjs/swagger';
+import {User} from './users.model';
+import {Role, Roles} from "../roles/roles.decorator";
+import {AuthGuard} from "../guards/auth.guard";
 
 @ApiTags('Пользователи')
 @Controller('users')
@@ -12,12 +14,14 @@ export class UsersController {
   @ApiOperation({ summary: 'Создание пользователя' })
   @ApiResponse({ status: 200, type: User })
   @Post()
+  @Roles(Role.Admin)
   create(@Body() userDto: CreateUserDto) {
     return this.userService.createUser(userDto);
   }
 
   @ApiOperation({ summary: 'Получение всех пользователей' })
   @ApiResponse({ status: 200, type: [User] })
+  @UseGuards(AuthGuard)
   @Get()
   getAllUsers() {
     return this.userService.getAllUsers();
@@ -25,6 +29,7 @@ export class UsersController {
 
   @ApiOperation({ summary: 'Получение пользователя по ID' })
   @ApiResponse({ status: 200, type: User })
+  @UseGuards(AuthGuard)
   @Get(':id')
   getOneUser(@Param('id') id: string) {
     return this.userService.getOneUser(id);
