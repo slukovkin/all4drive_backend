@@ -29,7 +29,7 @@ import { UserStore } from './stores/user-stores.model';
     UsersModule,
     RolesModule,
     AuthModule,
-    StoresModule
+    StoresModule,
   ],
 })
 export class AppModule {}
