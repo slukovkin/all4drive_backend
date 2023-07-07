@@ -4,17 +4,18 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import { UsersService } from '../users/users.service';
-import { CreateUserDto } from '../users/dto/create-user.dto';
-import { JwtService } from '@nestjs/jwt';
-import * as bcrypt from 'bcryptjs';
+import {UsersService} from '../users/users.service';
+import {CreateUserDto} from '../users/dto/create-user.dto';
+import {JwtService} from '@nestjs/jwt';
+import * as bcrypt from 'bcryptjs'
 
 @Injectable()
 export class AuthService {
   constructor(
     private userService: UsersService,
     private jwtService: JwtService,
-  ) {}
+  ) {
+  }
 
   async login(dto: CreateUserDto) {
     const user = await this.validateUser(dto);
@@ -29,12 +30,8 @@ export class AuthService {
         HttpStatus.CONFLICT,
       );
     }
-    const passwordHash = await bcrypt.hash(dto.password, 10);
-    const user = await this.userService.createUser({
-      ...dto,
-      password: passwordHash,
-    });
-    return this.generateToken(user);
+    const user = await this.userService.createUser(dto);
+    return this.generateToken(user)
   }
 
   private async generateToken(user) {
@@ -44,6 +41,7 @@ export class AuthService {
       roles: user.roles,
       stores: user.stores,
     };
+
     return {
       token: this.jwtService.sign(payload),
     };
