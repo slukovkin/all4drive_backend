@@ -47,4 +47,12 @@ export class UsersService {
     });
     return user;
   }
+
+  async removeUser(id: number) {
+    const isDestroyUser = await this.userRepository.destroy({where: {id}})
+    if (isDestroyUser) {
+      return new HttpException('deleting the user of the database', HttpStatus.OK)
+    }
+    return new HttpException('Deleted the user failed', HttpStatus.BAD_REQUEST)
+  }
 }
