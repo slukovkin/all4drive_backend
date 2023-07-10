@@ -1,21 +1,21 @@
+/* eslint-disable prettier/prettier */
 import {
   HttpException,
   HttpStatus,
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import {UsersService} from '../users/users.service';
-import {CreateUserDto} from '../users/dto/create-user.dto';
-import {JwtService} from '@nestjs/jwt';
-import * as bcrypt from 'bcryptjs'
+import { UsersService } from '../users/users.service';
+import { CreateUserDto } from '../users/dto/create-user.dto';
+import { JwtService } from '@nestjs/jwt';
+import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class AuthService {
   constructor(
     private userService: UsersService,
     private jwtService: JwtService,
-  ) {
-  }
+  ) {}
 
   async login(dto: CreateUserDto) {
     const user = await this.validateUser(dto);
@@ -31,7 +31,7 @@ export class AuthService {
       );
     }
     const user = await this.userService.createUser(dto);
-    return this.generateToken(user)
+    return this.generateToken(user);
   }
 
   private async generateToken(user) {

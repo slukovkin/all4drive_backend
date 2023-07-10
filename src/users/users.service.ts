@@ -1,8 +1,9 @@
-import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
-import {User} from './users.model';
-import {InjectModel} from '@nestjs/sequelize';
-import {CreateUserDto} from './dto/create-user.dto';
-import {RolesService} from '../roles/roles.service';
+/* eslint-disable prettier/prettier */
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { User } from './users.model';
+import { InjectModel } from '@nestjs/sequelize';
+import { CreateUserDto } from './dto/create-user.dto';
+import { RolesService } from '../roles/roles.service';
 import * as bcrypt from 'bcryptjs';
 
 @Injectable()
@@ -10,8 +11,7 @@ export class UsersService {
   constructor(
     @InjectModel(User) private userRepository: typeof User,
     private roleService: RolesService,
-  ) {
-  }
+  ) {}
 
   async createUser(dto: CreateUserDto) {
     try {
@@ -30,7 +30,7 @@ export class UsersService {
   }
 
   async getAllUsers() {
-    const users = await this.userRepository.findAll({include: {all: true}});
+    const users = await this.userRepository.findAll({ include: { all: true } });
     return users;
   }
 
@@ -42,17 +42,20 @@ export class UsersService {
   async getUserByEmail(email: string) {
     const user = await this.userRepository.findOne({
       rejectOnEmpty: undefined,
-      where: {email},
-      include: {all: true},
+      where: { email },
+      include: { all: true },
     });
     return user;
   }
 
   async removeUser(id: number) {
-    const isDestroyUser = await this.userRepository.destroy({where: {id}})
+    const isDestroyUser = await this.userRepository.destroy({ where: { id } });
     if (isDestroyUser) {
-      return new HttpException('deleting the user of the database', HttpStatus.OK)
+      return new HttpException(
+        'deleting the user of the database',
+        HttpStatus.OK,
+      );
     }
-    return new HttpException('Deleted the user failed', HttpStatus.BAD_REQUEST)
+    return new HttpException('Deleted the user failed', HttpStatus.BAD_REQUEST);
   }
 }
