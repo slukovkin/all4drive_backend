@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import {
   CanActivate,
   ExecutionContext,
@@ -14,12 +15,12 @@ export class AuthGuard implements CanActivate {
     const request = context.switchToHttp().getRequest();
     const isToken = request.headers.authorization;
     if (!isToken) {
-      throw new UnauthorizedException('Пользователь не авторизован');
+      throw new UnauthorizedException({ message: 'Пользователь не авторизован'});
     }
     const bearer = isToken.split(' ')[0];
     const token = isToken.split(' ')[1];
     if (bearer !== 'Bearer' || !token) {
-      throw new UnauthorizedException('Пользователь не авторизован');
+      throw new UnauthorizedException({ message: 'Пользователь не авторизован'});
     }
 
     const user = this.jwtService.verify(token);
