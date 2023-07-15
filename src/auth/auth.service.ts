@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import {
   HttpException,
   HttpStatus,
@@ -14,7 +13,7 @@ import * as bcrypt from 'bcryptjs';
 export class AuthService {
   constructor(
     private userService: UsersService,
-    private jwtService: JwtService,
+    private jwtService: JwtService
   ) {}
 
   async login(dto: CreateUserDto) {
@@ -27,11 +26,14 @@ export class AuthService {
     if (candidate) {
       return new HttpException(
         'A user with this email exists in the database',
-        HttpStatus.CONFLICT,
+        HttpStatus.CONFLICT
       );
     }
     const passwordHash: string = await bcrypt.hash(dto.password, 10);
-    const user = await this.userService.createUser({...dto, password: passwordHash});
+    const user = await this.userService.createUser({
+      ...dto,
+      password: passwordHash,
+    });
     return this.generateToken(user);
   }
 
@@ -43,8 +45,8 @@ export class AuthService {
       stores: user.stores,
     };
     return {
-      token: this.jwtService.sign(payload)
-    }
+      token: this.jwtService.sign(payload),
+    };
   }
 
   private async validateUser(dto: CreateUserDto) {

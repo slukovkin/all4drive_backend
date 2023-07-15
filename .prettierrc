@@ -3,5 +3,12 @@
   "bracketSpacing": true,
   "semi": true,
   "tabWidth": 2,
-  "printWidth": 80
+  "printWidth": 80,
+  "prettier/prettier": [
+    "error",
+    {
+      "singleQuote": true,
+      "parser": "flow"
+    }
+  ]
 }

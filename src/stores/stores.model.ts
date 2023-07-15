@@ -5,15 +5,15 @@ import {
   Model,
   Table,
 } from 'sequelize-typescript';
-import {User} from '../users/users.model';
-import {UserStore} from './user-stores.model';
+import { User } from '../users/users.model';
+import { UserStore } from './user-stores.model';
 
 interface IStoreCreation {
   value: string;
   description: string;
 }
 
-@Table({tableName: 'stores'})
+@Table({ tableName: 'stores' })
 export class Store extends Model<Store, IStoreCreation> {
   @Column({
     type: DataType.INTEGER,
@@ -23,10 +23,10 @@ export class Store extends Model<Store, IStoreCreation> {
   })
   id: number;
 
-  @Column({type: DataType.STRING, unique: true, allowNull: true})
+  @Column({ type: DataType.STRING, unique: true, allowNull: true })
   value: string;
 
-  @Column({type: DataType.STRING})
+  @Column({ type: DataType.STRING })
   description: string;
 
   @BelongsToMany(() => User, () => UserStore)

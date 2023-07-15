@@ -1,16 +1,14 @@
-/* eslint-disable prettier/prettier */
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { User } from './users.model';
 import { InjectModel } from '@nestjs/sequelize';
 import { CreateUserDto } from './dto/create-user.dto';
 import { RolesService } from '../roles/roles.service';
-// import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectModel(User) private userRepository: typeof User,
-    private roleService: RolesService,
+    private roleService: RolesService
   ) {}
 
   async createUser(dto: CreateUserDto) {
@@ -49,7 +47,7 @@ export class UsersService {
     if (isDestroyUser) {
       return new HttpException(
         'deleting the user of the database',
-        HttpStatus.OK,
+        HttpStatus.OK
       );
     }
     return new HttpException('Deleted the user failed', HttpStatus.BAD_REQUEST);
