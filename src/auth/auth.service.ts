@@ -45,6 +45,7 @@ export class AuthService {
       stores: user.stores,
     };
     return {
+      ...user.dataValues,
       token: this.jwtService.sign(payload),
     };
   }
