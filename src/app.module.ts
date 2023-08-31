@@ -10,7 +10,6 @@ import { AuthModule } from './auth/auth.module';
 import { StoresModule } from './stores/stores.module';
 import { Store } from './stores/stores.model';
 import { UserStore } from './stores/user-stores.model';
-import { ProductController } from './product/products.controller';
 import { ProductModule } from './product/products.module';
 import { Product } from './product/products.model';
 
@@ -35,6 +34,6 @@ import { Product } from './product/products.model';
     StoresModule,
     ProductModule,
   ],
-  controllers: [ProductController],
+  controllers: [],
 })
 export class AppModule {}

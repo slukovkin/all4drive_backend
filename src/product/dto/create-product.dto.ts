@@ -1,10 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, Length, MinLength } from 'class-validator';
+import { IsNotEmpty, Length, MaxLength, MinLength } from 'class-validator';
 
 export class CreateProductDto {
   @ApiProperty({ example: '64209557', description: 'Код продукта' })
   @IsNotEmpty()
-  @Length(8)
+  // @MinLength(8)
   readonly code: number;
 
   @ApiProperty({ example: 'OC282', description: 'Артикул продукта' })
@@ -22,7 +22,7 @@ export class CreateProductDto {
 
   @ApiProperty({ example: '64209', description: 'Кросс-код продукта' })
   @IsNotEmpty()
-  @Length(5)
+  // @MaxLength(5)
   readonly cross: number;
 
   @ApiProperty({

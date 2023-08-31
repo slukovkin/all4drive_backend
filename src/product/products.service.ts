@@ -17,4 +17,8 @@ export class ProductService {
       return new HttpException('Bad requiest', HttpStatus.BAD_REQUEST);
     }
   }
+
+  async getProducts() {
+    return await this.productRepository.findAll();
+  }
 }
